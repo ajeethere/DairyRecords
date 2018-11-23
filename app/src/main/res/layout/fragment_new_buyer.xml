@@ -51,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_20dp"
                 android:id="@+id/newbuyer_save_buyer_and_move_to_order_btn"
-                android:text="save and order now"/>
+                android:text="@string/btn_txt"
+               />
         </LinearLayout>
     </ScrollView>
 

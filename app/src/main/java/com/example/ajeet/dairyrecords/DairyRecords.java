@@ -12,11 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class DairyRecords extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView listViewMainActivity;
+    LinearLayout linearLayout;
     DairyDBHelper dairyDBHelper;
 
 
@@ -26,6 +28,7 @@ public class DairyRecords extends AppCompatActivity
         setContentView(R.layout.activity_dairy_records);
         dairyDBHelper=new DairyDBHelper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        linearLayout= (LinearLayout)findViewById(R.id.list_view_layout_main_activity);
         setSupportActionBar(toolbar);
 
 
@@ -73,8 +76,11 @@ public class DairyRecords extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_add_new_buyer) {
+           linearLayout.setVisibility(View.GONE);
+
+
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
