@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -78,6 +79,24 @@ public class DairyRecords extends AppCompatActivity
 
         if (id == R.id.nav_add_new_buyer) {
            linearLayout.setVisibility(View.GONE);
+            FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
+            frameLayout.setVisibility(View.VISIBLE);
+            android.support.v4.app.Fragment fragment=null;
+            Class fragmentClass=null;
+            fragmentClass=NewBuyerFragment.class;
+            try {
+                fragment= (android.support.v4.app.Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (fragment!=null){
+                String backStateName = fragment.getClass().getName();
+                android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fram_layout_main_activity,fragment);
+                ft.addToBackStack(backStateName);
+                ft.commit();
+
+            }
 
 
 

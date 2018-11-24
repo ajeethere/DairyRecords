@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ajeet.dairyrecords.R;
 
@@ -14,7 +17,10 @@ import com.example.ajeet.dairyrecords.R;
  * A simple {@link Fragment} subclass.
  */
 public class NewBuyerFragment extends Fragment {
-
+    EditText nameTxt,surNameTxt,fathersNameTxt,addressTxt,phoneTxt;
+    Button saveBuyerBtn;
+    View rootView=null;
+DairyDBHelper dairyDBHelper;
 
     public NewBuyerFragment() {
         // Required empty public constructor
@@ -25,7 +31,21 @@ public class NewBuyerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_buyer, container, false);
+        this.rootView= inflater.inflate(R.layout.fragment_new_buyer, container, false);
+        nameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_name);
+        surNameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_sur_name);
+        fathersNameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_fathers_name);
+        addressTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_address);
+        phoneTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_phone);
+        saveBuyerBtn=(Button)rootView.findViewById(R.id.newbuyer_save_buyer_and_move_to_order_btn);
+        saveBuyerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
+        return rootView;
     }
 
 }

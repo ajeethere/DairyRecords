@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter Buyer Details"
+        android:layout_margin="@dimen/dim_20dp"
         android:textSize="@dimen/dim_20dp"/>
     <ScrollView
         android:layout_width="wrap_content"
@@ -45,13 +46,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newbuyer_buyer_phone"
+        android:inputType="number"
         android:hint="Enter Phone No."/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_20dp"
                 android:id="@+id/newbuyer_save_buyer_and_move_to_order_btn"
-                android:text="@string/btn_txt"
+                android:text="save and move to order
+"
                />
         </LinearLayout>
     </ScrollView>
