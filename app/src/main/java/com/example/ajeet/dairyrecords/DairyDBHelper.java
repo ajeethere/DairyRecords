@@ -1,8 +1,10 @@
 package com.example.ajeet.dairyrecords;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ScrollView;
 
 public class DairyDBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="GathalaDairy.db";
@@ -22,11 +24,12 @@ public class DairyDBHelper extends SQLiteOpenHelper {
     public static final String Col_Quantity="ProductsQuantity";
     public static final String Col_Total_Amount="TotalAmount";
     public static final String Col_Total_Due_Amount="TotalDueAmount";
+    SQLiteDatabase db;
 
 
     public DairyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, 2);
-        SQLiteDatabase db=this.getWritableDatabase();
+        db = this.getWritableDatabase();
 
     }
 
@@ -53,5 +56,19 @@ public class DairyDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_BUYERS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_SOLED_ITEMS);
         onCreate(db);
+    }
+    public boolean insertData(String name, String surname, String fathersname, String address, String phone) {
+        db=this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Col_Name, name);
+        contentValues.put(Col_SurName, surname);
+        contentValues.put(Col_Fathers_Name, fathersname);
+        contentValues.put(Col_Add, address);
+        contentValues.put(Col_Phone, phone);
+        long result=db.insert(TABLE_BUYERS,null,contentValues);
+        if (result==-1){
+            return false;
+        }else
+        return true;
     }
 }
