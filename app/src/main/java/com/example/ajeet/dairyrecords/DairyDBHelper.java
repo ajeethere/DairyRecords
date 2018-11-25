@@ -58,7 +58,7 @@ public class DairyDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public boolean insertData(String name, String surname, String fathersname, String address, String phone) {
-        db=this.getWritableDatabase();
+      //  db=this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_Name, name);
         contentValues.put(Col_SurName, surname);

@@ -33,6 +33,7 @@ public class NewBuyerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.rootView= inflater.inflate(R.layout.fragment_new_buyer, container, false);
+        dairyDBHelper=new DairyDBHelper(getActivity());
         nameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_name);
         surNameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_sur_name);
         fathersNameTxt=(EditText)rootView.findViewById(R.id.newbuyer_buyer_fathers_name);
