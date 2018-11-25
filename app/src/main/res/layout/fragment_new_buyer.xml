@@ -8,6 +8,12 @@
     tools:context=".NewBuyerFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/buyer_details_layout"
+        android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,26 +32,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newbuyer_buyer_name"
+        android:gravity="center"
         android:hint="Enter Name"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newbuyer_buyer_sur_name"
+        android:gravity="center"
         android:hint="Enter SurName"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newbuyer_buyer_fathers_name"
+        android:gravity="center"
         android:hint="Enter Fathers Name"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:id="@+id/newbuyer_buyer_address"
         android:hint="Enter Address"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newbuyer_buyer_phone"
+        android:gravity="center"
         android:inputType="number"
         android:hint="Enter Phone No."/>
             <Button
@@ -53,10 +64,71 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim_20dp"
                 android:id="@+id/newbuyer_save_buyer_and_move_to_order_btn"
-                android:text="save and move to order
-"
+                android:text="next"
                />
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/order_detail_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Product To Buy"
+            android:layout_marginTop="@dimen/dim_20dp"
+            android:textSize="@dimen/dim_20dp"/>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="@dimen/dim_30dp"
+                android:orientation="vertical">
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/product_details_select_product_spinner"
+                    android:layout_margin="@dimen/dim_20dp"></Spinner>
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Product Price"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:layout_margin="@dimen/dim_20dp"
+                    android:id="@+id/product_details_price_txt"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dim_20dp"
+                    >
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Product Quantity"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:id="@+id/product_details_quantity_txt"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dim_20dp"
+                        android:text="Kg/Ltr"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
 
 </LinearLayout>

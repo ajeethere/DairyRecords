@@ -43,12 +43,6 @@ public class DairyDBHelper extends SQLiteOpenHelper {
                 + Col_Buyer_Name + " TEXT,"+ Col_Product_Name + " TEXT,"
                 + Col_Price +" INTEGER, "+Col_Quantity+" INTEGER, "+ Col_Total_Amount + " INTEGER,"+ Col_Total_Due_Amount + " INTEGER)");
 
-//        db.execSQL("create table " + TABLE_SOLED_ITEMS +"(" + Col_Product_Serial_No + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-//                + Col_Buyer_Name + "TEXT, "+ Col_Product_Name +"TEXT, " + Col_Price + "INTEGER," + Col_Quantity + "INTEGER," + Col_Total_Amount + "INTEGER,"
-//                + Col_Total_Due_Amount + "INTEGER)");
-
-
-
     }
 
     @Override
@@ -58,7 +52,6 @@ public class DairyDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public boolean insertData(String name, String surname, String fathersname, String address, String phone) {
-      //  db=this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_Name, name);
         contentValues.put(Col_SurName, surname);
