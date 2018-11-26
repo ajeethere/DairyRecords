@@ -11,24 +11,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:id="@+id/fram_layout_main_activity"></FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/list_view_layout_main_activity"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim_10dp"
-            android:textSize="@dimen/dim_30dp"
-            android:text="All buyers"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dim_10dp"
-        android:id="@+id/list_view_main_activity"></ListView>
-    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

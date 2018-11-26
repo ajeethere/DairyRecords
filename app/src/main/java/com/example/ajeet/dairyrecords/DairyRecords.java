@@ -32,6 +32,22 @@ public class DairyRecords extends AppCompatActivity
         linearLayout= (LinearLayout)findViewById(R.id.list_view_layout_main_activity);
         setSupportActionBar(toolbar);
 
+        FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
+        frameLayout.setVisibility(View.VISIBLE);
+        android.support.v4.app.Fragment fragment=null;
+        Class fragmentClass=null;
+        fragmentClass=WelcomeFragment.class;
+        try {
+            fragment= (android.support.v4.app.Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (fragment!=null){
+            android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fram_layout_main_activity,fragment);
+            ft.commit();
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,9 +94,7 @@ public class DairyRecords extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_add_new_buyer) {
-           linearLayout.setVisibility(View.GONE);
             FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
-            frameLayout.setVisibility(View.VISIBLE);
             android.support.v4.app.Fragment fragment=null;
             Class fragmentClass=null;
             fragmentClass=NewBuyerFragment.class;
@@ -100,9 +114,27 @@ public class DairyRecords extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_unpaid_orders) {
 
-        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_paid_orders) {
+            FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
+            android.support.v4.app.Fragment fragment=null;
+            Class fragmentClass=null;
+            fragmentClass=PaidOrderFragment.class;
+            try {
+                fragment= (android.support.v4.app.Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (fragment!=null){
+                String backStateName = fragment.getClass().getName();
+                android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fram_layout_main_activity,fragment);
+                ft.addToBackStack(backStateName);
+                ft.commit();
+
+            }
 
         } else if (id == R.id.nav_manage) {
 
