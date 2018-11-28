@@ -19,11 +19,11 @@
             android:layout_marginTop="@dimen/dim_10dp"
             android:textSize="@dimen/dim_30dp"
             android:text="All buyers"/>
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dim_10dp"
-            android:id="@+id/list_view_main_activity"></ListView>
+            android:id="@+id/recycler_view_main_activity"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </LinearLayout>

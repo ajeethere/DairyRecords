@@ -2,6 +2,7 @@ package com.example.ajeet.dairyrecords;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.ScrollView;
@@ -63,5 +64,9 @@ public class DairyDBHelper extends SQLiteOpenHelper {
             return false;
         }else
         return true;
+    }
+    public Cursor getAllData() {
+        Cursor res = db.rawQuery("select * from " + TABLE_BUYERS, null);
+        return res;
     }
 }

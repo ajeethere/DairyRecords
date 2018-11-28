@@ -64,11 +64,11 @@ public class NewBuyerFragment extends Fragment {
                buyerDetailsLayout.setVisibility(View.GONE);
                productDetailsLayout.setVisibility(View.VISIBLE);
 
-//               boolean inserted=dairyDBHelper.insertData(nameTxt.getText().toString(),surNameTxt.getText().toString(),
-//                       fathersNameTxt.getText().toString(),addressTxt.getText().toString(),phoneTxt.getText().toString());
-//               if (inserted==true){
-//                   Toast.makeText(getContext(),"User Saved",Toast.LENGTH_LONG).show();
-//               }else Toast.makeText(getContext(),"Data not Saved",Toast.LENGTH_LONG).show();
+               boolean inserted=dairyDBHelper.insertData(nameTxt.getText().toString(),surNameTxt.getText().toString(),
+                       fathersNameTxt.getText().toString(),addressTxt.getText().toString(),phoneTxt.getText().toString());
+               if (inserted==true){
+                   Toast.makeText(getContext(),"User Saved",Toast.LENGTH_LONG).show();
+               }else Toast.makeText(getContext(),"Data not Saved",Toast.LENGTH_LONG).show();
            }
        });
     }
