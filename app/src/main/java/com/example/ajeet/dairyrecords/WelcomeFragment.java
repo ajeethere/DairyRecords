@@ -9,9 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +36,13 @@ public class WelcomeFragment extends Fragment {
         DairyDBHelper myDB = new DairyDBHelper(getActivity());
 
         Cursor res=myDB.getAllData();
-        List<TestObject> list = new ArrayList<>();
+        List<WelcomeAdaptObject> list = new ArrayList<>();
         while (res.moveToNext()){
-            list.add(new TestObject(res.getString(1), res.getString(0), res.getString(5)));
+            list.add(new WelcomeAdaptObject(res.getString(1), res.getString(0), res.getString(5)));
 
         }
 
+        RecyclerView.LayoutManager layoutManager;
         welFragListView.setHasFixedSize(true);
         welFragListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         welFragListView.setAdapter(new AdapterForWel(list));

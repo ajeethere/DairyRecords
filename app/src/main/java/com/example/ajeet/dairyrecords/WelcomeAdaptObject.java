@@ -1,13 +1,13 @@
 package com.example.ajeet.dairyrecords;
 
 
-class TestObject {
+class WelcomeAdaptObject {
 
     private String name;
     private String serialNo;
     private String contactNo;
 
-    public TestObject(String name, String serialNo, String contactNo) {
+    public WelcomeAdaptObject(String name, String serialNo, String contactNo) {
         this.name = name;
         this.contactNo = contactNo;
         this.serialNo = serialNo;

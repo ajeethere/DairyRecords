@@ -5,14 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-public class MyViewHolder extends RecyclerView.ViewHolder {
+public class WelcomeViewHolder extends RecyclerView.ViewHolder {
     private View view;
-    public MyViewHolder(@NonNull View itemView) {
+    public WelcomeViewHolder(@NonNull View itemView) {
         super(itemView);
         view = itemView;
     }
 
-    public void bindItems(TestObject object) {
+    public void bindItems(WelcomeAdaptObject object) {
         TextView name = view.findViewById(R.id.welcome_purchaser_name);
         name.setText(object.getName());
 

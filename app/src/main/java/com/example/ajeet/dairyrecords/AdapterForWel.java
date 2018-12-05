@@ -8,25 +8,25 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class AdapterForWel extends RecyclerView.Adapter<MyViewHolder> {
+public class AdapterForWel extends RecyclerView.Adapter<WelcomeViewHolder> {
 
-    List<TestObject> data;
+    List<WelcomeAdaptObject> data;
 
-    public AdapterForWel(List<TestObject> data) {
+    public AdapterForWel(List<WelcomeAdaptObject> data) {
         this.data = data;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public WelcomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.welcome_listview_items, viewGroup, false);
-        return new MyViewHolder(view);
+        return new WelcomeViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        TestObject object = data.get(i);
-        myViewHolder.bindItems(object);
+    public void onBindViewHolder(@NonNull WelcomeViewHolder welcomeViewHolder, int i) {
+        WelcomeAdaptObject object = data.get(i);
+        welcomeViewHolder.bindItems(object);
     }
 
     @Override
