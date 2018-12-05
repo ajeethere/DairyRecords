@@ -34,9 +34,12 @@ public class PaidOrderFragment extends Fragment {
         paidFragRecyclerView=(RecyclerView)rootView.findViewById(R.id.paid_orders_recycler_view);
         DairyDBHelper dairyDBHelper=new DairyDBHelper(getActivity());
         Cursor res=dairyDBHelper.getAllData();
+        Cursor res1=dairyDBHelper.getAllDataSoldItems();
         List<PaidAdaptObject> list = new ArrayList<>();
         while (res.moveToNext()){
-            list.add(new PaidAdaptObject(res.getString(0),res.getString(1),res.getString(5)));
+            String a=res.getString(6);
+            if (a.equals("paid")){
+            list.add(new PaidAdaptObject(res.getString(0),res.getString(1),res.getString(5)));}
         }
         RecyclerView.LayoutManager layoutManager;
         paidFragRecyclerView.setHasFixedSize(true);
