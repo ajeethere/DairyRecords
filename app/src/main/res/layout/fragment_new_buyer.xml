@@ -73,8 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
         android:visibility="gone"
+        android:orientation="vertical"
         android:id="@+id/order_detail_layout">
         <TextView
             android:layout_width="wrap_content"
@@ -169,18 +169,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/due_layout"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_margin="@dimen/dim_10dp"
             android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="select commitment date"
+                    android:background="@drawable/textbox_background"
+                    android:padding="@dimen/dim_5dp"
+                    android:id="@+id/select_commotment_date_txt"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim_10dp">
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="enter due amount"
+                android:inputType="number"
                 android:id="@+id/enter_due_amount"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="done"
                 android:id="@+id/due_done_btn"/>
+            </LinearLayout>
         </LinearLayout>
         <Button
             android:layout_width="wrap_content"

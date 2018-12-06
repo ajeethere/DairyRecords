@@ -1,13 +1,19 @@
 package com.example.ajeet.dairyrecords;
 
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,6 +24,10 @@ import android.widget.Toast;
 
 import com.example.ajeet.dairyrecords.R;
 
+import java.util.Calendar;
+
+import static android.content.ContentValues.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +37,8 @@ public class NewBuyerFragment extends Fragment {
     Button productNextBtn,paymentNextBtn,orderDoneBtn;
     RadioButton cashRadioBtn,dueRadioBtn;
     LinearLayout buyerDetailsLayout,productDetailsLayout,paymentDetailsLayout,dueLayout;
+    TextView selectDateText;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
     View rootView=null;
     DairyDBHelper dairyDBHelper;
 
@@ -84,6 +96,30 @@ public class NewBuyerFragment extends Fragment {
                 paymentDetailsLayout.setVisibility(View.VISIBLE);
             }
         });
+        selectDateText=(TextView)rootView.findViewById(R.id.select_commotment_date_txt);
+        selectDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal=Calendar.getInstance();
+                int year=cal.get(Calendar.YEAR);
+                int month=cal.get(Calendar.MONTH);
+                int date=cal.get(Calendar.DATE);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,dateSetListener,year,month,date);
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.show();
+
+            }
+        });
+        dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month=month+1;
+                Log.d(TAG,"onDateSet: date: "+dayOfMonth+"/"+month+"/"+year);
+                String date=dayOfMonth+"/"+month+"/"+year;
+                selectDateText.setText(date);
+            }
+        };
 
         saveData();
         return rootView;
