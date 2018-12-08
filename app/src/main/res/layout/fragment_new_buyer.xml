@@ -82,7 +82,6 @@
             android:text="Add Product To Buy"
             android:layout_marginTop="@dimen/dim_20dp"
             android:textSize="@dimen/dim_20dp"/>
-
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -103,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product Price"
                     android:gravity="center"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_margin="@dimen/dim_20dp"
                     android:id="@+id/product_details_price_txt"/>
                 <LinearLayout
@@ -116,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Product Quantity"
                     android:gravity="center"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:id="@+id/product_details_quantity_txt"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -189,13 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="enter due amount"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:id="@+id/enter_due_amount"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="done"
-                android:id="@+id/due_done_btn"/>
             </LinearLayout>
         </LinearLayout>
         <Button
@@ -203,7 +197,6 @@
             android:layout_height="wrap_content"
             android:text="done"
             android:layout_margin="@dimen/dim_10dp"
-            android:visibility="gone"
             android:id="@+id/cash_done_btn"/>
     </LinearLayout>
 </LinearLayout>

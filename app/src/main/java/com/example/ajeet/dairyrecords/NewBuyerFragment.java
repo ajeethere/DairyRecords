@@ -1,12 +1,14 @@
 package com.example.ajeet.dairyrecords;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.example.ajeet.dairyrecords.R;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,20 +36,21 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class NewBuyerFragment extends Fragment {
-    EditText nameTxt,surNameTxt,fathersNameTxt,addressTxt,phoneTxt;
+    EditText nameTxt,surNameTxt,fathersNameTxt,addressTxt,phoneTxt,productPrice,productQuantity,dueAmountTxt;
     Button productNextBtn,paymentNextBtn,orderDoneBtn;
     RadioButton cashRadioBtn,dueRadioBtn;
     LinearLayout buyerDetailsLayout,productDetailsLayout,paymentDetailsLayout,dueLayout;
-    TextView selectDateText;
+    TextView selectDateText,totalAmountTxt;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     View rootView=null;
     DairyDBHelper dairyDBHelper;
-
+    Spinner spinnerProductName;
     public NewBuyerFragment() {
         // Required empty public constructor
     }
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,11 +60,14 @@ public class NewBuyerFragment extends Fragment {
         String[] arraySpinner = new String[] {
                 "Select Product", "Milk", "Meva", "Mishri Meva", "Ghee" ,"Burfi" , "Rasgulla" , "Rasbhari" , "Gulabjamun"
         };
-        Spinner s = (Spinner) rootView.findViewById(R.id.product_details_select_product_spinner);
+        spinnerProductName = (Spinner) rootView.findViewById(R.id.product_details_select_product_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        s.setAdapter(adapter);
+        spinnerProductName.setAdapter(adapter);
+        productPrice=(EditText)rootView.findViewById(R.id.product_details_price_txt);
+        productQuantity=(EditText)rootView.findViewById(R.id.product_details_quantity_txt);
+        dueAmountTxt=(EditText)rootView.findViewById(R.id.enter_due_amount);
         buyerDetailsLayout=(LinearLayout)rootView.findViewById(R.id.buyer_details_layout);
         productDetailsLayout=(LinearLayout)rootView.findViewById(R.id.order_detail_layout);
         paymentDetailsLayout=(LinearLayout)rootView.findViewById(R.id.payment_details_layout);
@@ -73,18 +80,17 @@ public class NewBuyerFragment extends Fragment {
         orderDoneBtn=(Button)rootView.findViewById(R.id.cash_done_btn);
         productNextBtn=(Button)rootView.findViewById(R.id.newbuyer_save_buyer_and_move_to_order_btn);
         cashRadioBtn=(RadioButton)rootView.findViewById(R.id.cash_radio_btn);
+        totalAmountTxt=(TextView)rootView.findViewById(R.id.total_amount_txt);
         cashRadioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dueLayout.setVisibility(View.GONE);
-             orderDoneBtn.setVisibility(View.VISIBLE);
             }
         });
         dueRadioBtn=(RadioButton)rootView.findViewById(R.id.due_radio_btn);
         dueRadioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orderDoneBtn.setVisibility(View.GONE);
                 dueLayout.setVisibility(View.VISIBLE);
             }
         });
@@ -94,6 +100,9 @@ public class NewBuyerFragment extends Fragment {
             public void onClick(View v) {
                 productDetailsLayout.setVisibility(View.GONE);
                 paymentDetailsLayout.setVisibility(View.VISIBLE);
+                double total=Double.parseDouble(productPrice.getText().toString())*Double.parseDouble(productQuantity.getText().toString());
+                totalAmountTxt.setText(Double.toString(total));
+
             }
         });
         selectDateText=(TextView)rootView.findViewById(R.id.select_commotment_date_txt);
@@ -130,12 +139,44 @@ public class NewBuyerFragment extends Fragment {
            public void onClick(View v) {
                buyerDetailsLayout.setVisibility(View.GONE);
                productDetailsLayout.setVisibility(View.VISIBLE);
-//               String a="paid";
-//               boolean inserted=dairyDBHelper.insertData(nameTxt.getText().toString(),surNameTxt.getText().toString(),
-//                       fathersNameTxt.getText().toString(),addressTxt.getText().toString(),phoneTxt.getText().toString(),"paid");
-//               if (inserted==true){
-//                   Toast.makeText(getContext(),"User Saved",Toast.LENGTH_LONG).show();
-//               }else Toast.makeText(getContext(),"Data not Saved",Toast.LENGTH_LONG).show();
+
+           }
+       });
+
+       orderDoneBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+               String date1 = null;
+               double dueAmount = 0;
+
+               if (cashRadioBtn.isChecked()){
+                   Calendar cal=Calendar.getInstance();
+                   int year=cal.get(Calendar.YEAR);
+                   int month=cal.get(Calendar.MONTH);
+                   int date=cal.get(Calendar.DATE);
+                   date1=date+"/"+month+"/"+year;
+                   dueAmount=0.0;
+               }
+               if (dueRadioBtn.isChecked()){
+                   dueAmount=Double.parseDouble(dueAmountTxt.getText().toString());
+                   date1=selectDateText.getText().toString();
+               }
+
+               boolean inserted=dairyDBHelper.insertData(nameTxt.getText().toString(),surNameTxt.getText().toString(),
+                       fathersNameTxt.getText().toString(),addressTxt.getText().toString(),phoneTxt.getText().toString());
+               boolean inserted1=dairyDBHelper.insertProductData(nameTxt.getText().toString()+" "
+                       +surNameTxt.getText().toString(),spinnerProductName.getSelectedItem().toString(),
+                       Double.parseDouble(productPrice.getText().toString()),Double.parseDouble(productQuantity.getText().toString()),
+                       Double.parseDouble(productPrice.getText().toString())*Double.parseDouble(productQuantity.getText().toString()),
+                       dueAmount,
+                       date1);
+               if (inserted==true){
+                   Toast.makeText(getContext(),"User Saved",Toast.LENGTH_LONG).show();
+               }else Toast.makeText(getContext(),"User Data Not Saved",Toast.LENGTH_LONG).show();
+               if (inserted1==true){
+                   Toast.makeText(getContext(),"Order saved",Toast.LENGTH_LONG).show();
+               }else Toast.makeText(getContext(),"Order Data Not Saved",Toast.LENGTH_LONG).show();
            }
        });
     }
