@@ -1,6 +1,7 @@
 package com.example.ajeet.dairyrecords;
 
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,10 +16,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class DairyRecords extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ListView listViewMainActivity;
     LinearLayout linearLayout;
     DairyDBHelper dairyDBHelper;
 
@@ -32,8 +33,7 @@ public class DairyRecords extends AppCompatActivity
         linearLayout= (LinearLayout)findViewById(R.id.list_view_layout_main_activity);
         setSupportActionBar(toolbar);
 
-        FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
-        frameLayout.setVisibility(View.VISIBLE);
+        final FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
         android.support.v4.app.Fragment fragment=null;
         Class fragmentClass=null;
         fragmentClass=WelcomeFragment.class;
@@ -50,13 +50,36 @@ public class DairyRecords extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View header =navigationView.getHeaderView(0);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                android.support.v4.app.Fragment fragment=null;
+                Class fragmentClass=null;
+                fragmentClass=WelcomeFragment.class;
+                try {
+                    fragment= (android.support.v4.app.Fragment) fragmentClass.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (fragment!=null){
+                    android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fram_layout_main_activity,fragment);
+                    ft.commit();
+
+                }
+            }
+        });
+
     }
 
     @Override
@@ -94,7 +117,6 @@ public class DairyRecords extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_add_new_buyer) {
-            FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
             android.support.v4.app.Fragment fragment=null;
             Class fragmentClass=null;
             fragmentClass=NewBuyerFragment.class;
@@ -116,9 +138,23 @@ public class DairyRecords extends AppCompatActivity
 
         } else if (id == R.id.nav_unpaid_orders) {
 
+            android.support.v4.app.Fragment fragment=null;
+            Class fragmentClass=null;
+            fragmentClass=UnpaidFragment.class;
+            try {
+                fragment= (android.support.v4.app.Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (fragment!=null){
+                String backStateName = fragment.getClass().getName();
+                android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fram_layout_main_activity,fragment);
+                ft.addToBackStack(backStateName);
+                ft.commit();
 
+            }
         } else if (id == R.id.nav_paid_orders) {
-            FrameLayout frameLayout=(FrameLayout)findViewById(R.id.fram_layout_main_activity);
             android.support.v4.app.Fragment fragment=null;
             Class fragmentClass=null;
             fragmentClass=PaidOrderFragment.class;

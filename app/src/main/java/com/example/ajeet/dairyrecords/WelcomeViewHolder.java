@@ -1,5 +1,7 @@
 package com.example.ajeet.dairyrecords;
 
+import android.database.Cursor;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,5 +24,8 @@ public class WelcomeViewHolder extends RecyclerView.ViewHolder {
 
         TextView serial = view.findViewById(R.id.welcome_seroial_no_);
         serial.setText(object.getSerialNo());
+        if (object.getDue()==0){
+            name.setTextColor(Color.RED);
+        }
     }
 }

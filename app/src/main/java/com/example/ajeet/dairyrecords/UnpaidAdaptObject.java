@@ -1,18 +1,22 @@
 package com.example.ajeet.dairyrecords;
 
-
-class WelcomeAdaptObject {
-
-    private String name;
+public class UnpaidAdaptObject {
     private String serialNo;
+    private String name;
     private String contactNo;
-    private double due;
 
-    public WelcomeAdaptObject(String name, String serialNo, String contactNo,double due) {
+    public UnpaidAdaptObject(String serialNo, String name, String contactNo){
         this.name = name;
         this.contactNo = contactNo;
         this.serialNo = serialNo;
-        this.due=due;
+
+    }
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
     }
 
     public String getName() {
@@ -23,14 +27,6 @@ class WelcomeAdaptObject {
         this.name = name;
     }
 
-    public String getSerialNo() {
-        return serialNo;
-    }
-
-    public void setSerialNo(String serialNo) {
-        this.serialNo = serialNo;
-    }
-
     public String getContactNo() {
         return contactNo;
     }
@@ -39,11 +35,5 @@ class WelcomeAdaptObject {
         this.contactNo = contactNo;
     }
 
-    public double getDue() {
-        return due;
-    }
-    public void setDue(double due) {
-        this.due = due;
-    }
 
 }

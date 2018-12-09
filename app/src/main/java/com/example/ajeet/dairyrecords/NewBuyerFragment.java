@@ -101,7 +101,8 @@ public class NewBuyerFragment extends Fragment {
                 productDetailsLayout.setVisibility(View.GONE);
                 paymentDetailsLayout.setVisibility(View.VISIBLE);
                 double total=Double.parseDouble(productPrice.getText().toString())*Double.parseDouble(productQuantity.getText().toString());
-                totalAmountTxt.setText(Double.toString(total));
+                String a= getString(R.string.amount_sign);
+                totalAmountTxt.setText("Total Amount:-"+Double.toString(total)+a);
 
             }
         });
