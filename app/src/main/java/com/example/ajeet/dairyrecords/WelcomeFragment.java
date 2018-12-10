@@ -1,6 +1,7 @@
 package com.example.ajeet.dairyrecords;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +37,12 @@ public class WelcomeFragment extends Fragment {
 
         DairyDBHelper myDB = new DairyDBHelper(getActivity());
 
-        Cursor res=myDB.getAllData();
+        final Cursor res=myDB.getAllData();
         Cursor res1=myDB.getAllDataSoldItems();
         List<WelcomeAdaptObject> list = new ArrayList<>();
         while (res.moveToNext()&&res1.moveToNext()){
             list.add(new WelcomeAdaptObject(res.getString(1), res.getString(0), res.getString(5),
-                    res1.getDouble(6)));
+                    res1.getDouble(6),getContext()));
 
         }
 
@@ -49,8 +51,17 @@ public class WelcomeFragment extends Fragment {
         welFragListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         welFragListView.setAdapter(new AdapterForWel(list));
 
+
+        welFragListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"clicked" ,Toast.LENGTH_LONG).show();
+            }
+        });
+
         return rootView;
 
     }
+
 }
 

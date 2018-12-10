@@ -1,18 +1,23 @@
 package com.example.ajeet.dairyrecords;
 
 
+import android.content.Context;
+import android.widget.Toast;
+
 class WelcomeAdaptObject {
 
     private String name;
     private String serialNo;
     private String contactNo;
     private double due;
+    Context context;
 
-    public WelcomeAdaptObject(String name, String serialNo, String contactNo,double due) {
+    public WelcomeAdaptObject(String name, String serialNo, String contactNo, double due, Context context) {
         this.name = name;
         this.contactNo = contactNo;
         this.serialNo = serialNo;
         this.due=due;
+        this.context=context;
     }
 
     public String getName() {
@@ -46,4 +51,11 @@ class WelcomeAdaptObject {
         this.due = due;
     }
 
+    public Context getContext(){
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }
